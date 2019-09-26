@@ -1,0 +1,131 @@
+<div class="container">
+
+    <h3>Education Details</h3>
+    <div class="table-responsive">
+        <table class="table" id="educationTable">
+            <tr class="success">
+                <th>Qualification</th>
+                <th>Specialization/Major</th>
+                <th>Year Of Passing</th>
+                <th>Action</th>
+            </tr>
+            <ng-container *ngFor="let model of education_modelArray">
+                    <tr [ngClass]="{'info': (model.id % 2 == 0), 
+                    'active': (model.id % 2 != 0)}">
+                            <td>{{model.qualification}}</td>
+                            <td>{{model.specialization}}</td>
+                            <td>{{model.yearofpassing}}</td>
+                            <td>
+                                <span class="table-remove">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="deleteEducation(model.id)">Delete</button>
+                                </span>
+                            </td>
+                        </tr>
+            </ng-container>
+        </table>
+    </div>
+
+
+
+    <div class="form-area">
+        <form name="educationform" (ngSubmit)="ef.form.valid && onEducationSubmit()" #ef="ngForm" novalidate>
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px;">Education Form</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                    name="qualification" 
+                    [(ngModel)]="education_model.qualification" 
+                    #qualification="ngModel" 
+                    placeholder="Qualification"
+                    [ngClass]="{ 'is-invalid': ef.submitted && qualification.invalid }" 
+                    required />
+                <div *ngIf="ef.submitted && qualification.invalid" class="alert alert-danger">
+                    <div *ngIf="qualification.errors.required">Qualification is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                    name="specialization" 
+                    [(ngModel)]="education_model.specialization" 
+                    #specialization="ngModel" 
+                    placeholder="Specialization/Major"
+                    [ngClass]="{ 'is-invalid': ef.submitted && specialization.invalid }" 
+                    required />
+                <div *ngIf="ef.submitted && specialization.invalid" class="alert alert-danger">
+                    <div *ngIf="specialization.errors.required">Specialization/Major is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                    name="yearofpassing" 
+                    [(ngModel)]="education_model.yearofpassing" 
+                    #yearofpassing="ngModel" 
+                    placeholder="Year Of Passing"
+                    [ngClass]="{ 'is-invalid': ef.submitted && yearofpassing.invalid }" 
+                    required />
+                <div *ngIf="ef.submitted && yearofpassing.invalid" class="alert alert-danger">
+                    <div *ngIf="yearofpassing.errors.required">Year Of Passing is required</div>
+                </div>
+            </div>
+            <input type="submit" value="Add Education" class="btn btn-primary">
+        </form>
+    </div>
+
+    <h3>Address Details</h3>
+    <div class="table-responsive">
+        <table class="table" id="addressTable">
+            <tr class="success">
+                <th>Address Type</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            <ng-container *ngFor="let model of address_modelArray">
+                    <tr [ngClass]="{'info': (model.id % 2 == 0), 
+                    'active': (model.id % 2 != 0)}">
+                            <td>{{model.addresstype}}</td>
+                            <td>{{model.address}}</td>
+                            <td>
+                                <span class="table-remove">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="deleteAddress(model.id)">Delete</button>
+                                </span>
+                            </td>
+                        </tr>
+            </ng-container>
+        </table>
+    </div>
+
+
+
+    <div class="form-area">
+        <form name="addressform" (ngSubmit)="f.form.valid && onAddressSubmit()" #f="ngForm" novalidate>
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px;">Address Form</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                    name="addresstype" 
+                    [(ngModel)]="address_model.addresstype" 
+                    #addresstype="ngModel" 
+                    placeholder="Address Type"
+                    [ngClass]="{ 'is-invalid': f.submitted && addresstype.invalid }" 
+                    required />
+                <div *ngIf="f.submitted && addresstype.invalid" class="alert alert-danger">
+                    <div *ngIf="addresstype.errors.required">Address Type is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                    name="address" 
+                    [(ngModel)]="address_model.address" 
+                    #address="ngModel" 
+                    placeholder="Address"
+                    [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" 
+                    required />
+                <div *ngIf="f.submitted && address.invalid" class="alert alert-danger">
+                    <div *ngIf="address.errors.required">Address is required</div>
+                </div>
+            </div>
+            <input type="submit" value="Add Address" class="btn btn-primary">
+        </form>
+    </div>
+
+</div>

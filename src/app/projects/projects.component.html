@@ -1,0 +1,80 @@
+<!-- main app container -->
+
+<div class="container">
+    <section id="projects">
+        <h2 class="title">Projects Details</h2>
+        <div id="projectDiv">
+            <ng-container *ngFor="let model of modelArray">
+                <section id="{{model.id}}" [ngClass]="{'section-light': (model.id % 2 == 0), 
+                'section-dark': (model.id % 2 != 0)}">
+                    <span class="table-remove">
+                        <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="delete(model.id)">Delete</button>
+                    </span>
+                    <h3>{{model.projectName}}</h3>
+                    <div>
+                        <span>
+                            <b>Duration : </b>
+                        </span>
+                        <span>{{model.duration}}</span>
+                    </div>
+                    <div>
+                        <span>
+                            <b>Description : </b>
+                        </span>
+                        <p>{{model.description}}</p>
+                    </div>
+                    <div>
+                        <span>
+                            <b>Responsibilities : </b>
+                        </span>
+                        <br>
+                        <ul>{{model.responsibilities}}</ul>
+                    </div>
+                </section>
+            </ng-container>
+
+        </div>
+    </section>
+    <div class="form-area">
+
+        <h3>Project Form</h3>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="projectName">Project Name</label>
+                <input type="text" class="form-control" name="projectName" [(ngModel)]="model.projectName" #projectName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && projectName.invalid }"
+                    required />
+                <div *ngIf="f.submitted && projectName.invalid" class="alert alert-danger">
+                    <div *ngIf="projectName.errors.required">Project Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration</label>
+                <input type="text" class="form-control" name="duration" [(ngModel)]="model.duration" #duration="ngModel" [ngClass]="{ 'is-invalid': f.submitted && duration.invalid }"
+                    required />
+                <div *ngIf="f.submitted && duration.invalid" class="alert alert-danger">
+                    <div *ngIf="duration.errors.required">Duration is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"
+                    required></textarea>
+                <div *ngIf="f.submitted && description.invalid" class="alert alert-danger">
+                    <div *ngIf="description.errors.required">Description is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="responsibilities">Responsibilities</label>
+                <textarea class="form-control" name="responsibilities" [(ngModel)]="model.responsibilities" #responsibilities="ngModel" [ngClass]="{ 'is-invalid': f.submitted && responsibilities.invalid }"
+                    required></textarea>
+                <div *ngIf="f.submitted && responsibilities.invalid" class="alert alert-danger">
+                    <div *ngIf="responsibilities.errors.required">Responsibilities is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Add Project</button>
+            </div>
+        </form>
+
+    </div>
+</div>

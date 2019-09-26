@@ -1,0 +1,83 @@
+<div class="container" id="contactFormDiv" *ngIf="!isSubmitted">
+        <div class="col-md-5">
+            <div class="form-area">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <br style="clear:both">
+                    <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" 
+                            name="firstname" 
+                            [(ngModel)]="model.firstname" 
+                            #firstname="ngModel" 
+                            placeholder="First Name"
+                            [ngClass]="{ 'is-invalid': f.submitted && firstname.invalid }" 
+                            required />
+                        <div *ngIf="f.submitted && firstname.invalid" class="alert alert-danger">
+                            <div *ngIf="firstname.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" 
+                            name="lastname" 
+                            [(ngModel)]="model.lastname" 
+                            #lastname="ngModel" 
+                            placeholder="Last Name"
+                            [ngClass]="{ 'is-invalid': f.submitted && lastname.invalid }" 
+                            required />
+                        <div *ngIf="f.submitted && lastname.invalid" class="alert alert-danger">
+                            <div *ngIf="lastname.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" 
+                            name="email" 
+                            [(ngModel)]="model.email" 
+                            #email="ngModel" 
+                            placeholder="Email"
+                            [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                            email
+                            required />
+                        <div *ngIf="f.submitted && email.invalid" class="alert alert-danger">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" 
+                            name="mobile" 
+                            [(ngModel)]="model.mobile" 
+                            #mobile="ngModel" 
+                            placeholder="Mobile Number"
+                            [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }"
+                            pattern="^\d{10}$" 
+                            required />
+                        <div *ngIf="f.submitted && mobile.invalid" class="alert alert-danger">
+                            <div *ngIf="mobile.errors.required">Mobile Number is required</div>
+                            <div *ngIf="mobile.errors.pattern">Must be a valid mobile number</div>
+                        </div>
+                    
+                    </div>
+                        <div class="form-group">
+                                <input type="text" class="form-control" 
+                                    name="subject" 
+                                    [(ngModel)]="model.subject" 
+                                    #subject="ngModel" 
+                                    placeholder="Subject"
+                                    [ngClass]="{ 'is-invalid': f.submitted && subject.invalid }" 
+                                    required />
+                                <div *ngIf="f.submitted && subject.invalid" class="alert alert-danger">
+                                    <div *ngIf="subject.errors.required">Subject is required</div>
+                                </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="remark" name="remark" placeholder="Write something.."></textarea>
+                        <br>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary pull-right">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="msg" *ngIf="isSubmitted">
+        <h2>Your information sent succesfully</h2>
+    </div>  

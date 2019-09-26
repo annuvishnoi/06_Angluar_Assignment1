@@ -1,0 +1,73 @@
+<div class="container">
+    <div>
+        <h3>Professional Summary</h3>
+        <ul>
+            <li>Having over 5.6 years of experience in the IT industry. Proficient in all phases of software development life
+                cycle
+            </li>
+            <li>Expertise in design, development and Implementation of web-based application using Java/J2EE platform</li>
+            <li>Strong Knowledge on JavaJ2EE Technologies like Servlet’s, JSP, JDBC, Struts Framework, spring, Hibernate Framework.</li>
+            <li>Worked on Spring Framework’s Like Spring IOC, Spring MVC </li>
+            <li>Expert in developing applications using Struts MVC framework, Spring MVC framework</li>
+
+        </ul>
+    </div>
+
+    <h3>Work Experience</h3>
+    <div class="table-responsive">
+        <table class="table" id="expTable">
+            <tr class="success">
+                <th>Company Name</th>
+                <th>Designation</th>
+                <th>Duration</th>
+
+                <th>Action</th>
+            </tr>
+            <ng-container *ngFor="let model of modelArray">
+                    <tr [ngClass]="{'info': (model.id % 2 == 0), 
+                    'active': (model.id % 2 != 0)}">
+                            <td>{{model.cmpName}}</td>
+                            <td>{{model.designation}}</td>
+                            <td>{{model.duration}}</td>
+                            <td>
+                                <span class="table-remove">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="delete(model.id)">Delete</button>
+                                </span>
+                            </td>
+                        </tr>
+            </ng-container>
+            
+        </table>
+    </div>
+    <div class="form-area">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px;">Experience Form</h3>
+            <div class="form-group">
+                <label for="cmpName">Company Name</label>
+                <input type="text" class="form-control" name="cmpName" [(ngModel)]="model.cmpName" #cmpName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cmpName.invalid }"
+                    required />
+                <div *ngIf="f.submitted && cmpName.invalid" class="alert alert-danger">
+                    <div *ngIf="cmpName.errors.required">Company Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="designation">Designation</label>
+                <input type="text" class="form-control" name="designation" [(ngModel)]="model.designation" #designation="ngModel" [ngClass]="{ 'is-invalid': f.submitted && designation.invalid }"
+                    required />
+                <div *ngIf="f.submitted && designation.invalid" class="alert alert-danger">
+                    <div *ngIf="designation.errors.required">Designation is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input type="text" class="form-control" name="duration" [(ngModel)]="model.duration" #duration="ngModel" [ngClass]="{ 'is-invalid': f.submitted && duration.invalid }"
+                        required />
+                    <div *ngIf="f.submitted && duration.invalid" class="alert alert-danger">
+                        <div *ngIf="duration.errors.required">Duration is required</div>
+                    </div>
+                </div>
+            <input type="submit" value="Add Experience" class="btn btn-primary">
+        </form>
+    </div>
+</div>
